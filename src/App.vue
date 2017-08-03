@@ -1,14 +1,19 @@
 <template>
-  <div id="app">
+  <!-- 这个id并没有什么意义,没有也没关系 -->
+  <div id="wrap">
     <v-header></v-header>
     <div class="tab">
-      <div class="tab-item">商品</div>
-      <div class="tab-item">评论</div>
-      <div class="tab-item">商家</div>
+      <div class="tab-item">
+        <router-link to="/goods">商品</router-link>
+      </div>
+      <div class="tab-item">
+        <router-link to="/ratings">评论</router-link>
+      </div>
+      <div class="tab-item">
+        <router-link to="/seller">商家</router-link>
+      </div>
     </div>
-    <div class="content">
-      content
-    </div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -24,7 +29,7 @@
 
 <style>
 /* 使用flex不用担心兼容性的写法，因为在vue-lodaer下的postcss会补全兼容性写法 */
-  #app .tab {
+  .tab {
     display: flex;
     width: 100%;
     height: 40px;
