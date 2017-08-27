@@ -1,7 +1,7 @@
 <template>
   <!-- 这个id并没有什么意义,没有也没关系 -->
   <div id="wrap">
-    <v-header></v-header>
+    <v-header :seller="seller"></v-header>
     <div class="tab">
       <div class="tab-item">
         <router-link to="/goods">商品</router-link>
