@@ -18,8 +18,16 @@
           <span class="text">{{seller.supports[0].description}}</span>
         </div>
       </div>
+      <div v-if="seller.supports" class="support-count">
+        <span class="count">{{seller.supports.length}}个</span>
+        <i>></i>
+      </div>
     </div>
-    <div class="bulletin-wrap"></div>
+    <div class="bulletin-wrap">
+      <span class="bulletin-title"></span>
+      <span class="bulletin-text">{{seller.bulletin}}</span>
+      <i>></i>
+    </div>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -40,9 +48,10 @@
   }
   .header {
     color: #fff;
-    background-color: #000;
+    background-color: #999;
   }
   .content-wrap {
+    position: relative;
     padding: 24px 12px 18px 24px;
   }
   .avatar {
@@ -110,4 +119,56 @@
     line-height: 12px;
     font-size: 12px;
   }
+  .support-count {
+    position: absolute;
+    right: 12px;
+    bottom: 18px;
+    padding: 0 8px;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 14px;
+    background: rgba(0,0,0,0.2);
+    text-align: center;
+  }
+  .support-count i, .bulletin-wrap i {
+    font-style: normal;
+  }
+  .count {
+    font-size: 10px;
+  }
+  .bulletin-wrap {
+    position: relative;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 22px 0 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: rgba(7,17,27,0.2);
+    /* font-size: 0; */
+  }
+  .bulletin-title {
+    display: inline-block;
+    width: 22px;
+    height: 12px;
+    margin-top: 7px;
+    background-image: url(../../common/images/bulletin@2x.png);
+    background-size: 22px 12px;
+    vertical-align: top;
+    background-repeat: no-repeat;
+  }
+  .bulletin-text {
+    margin: 0 4px;
+    font-size: 10px;
+    vertical-align: top;
+  }
+  .bulletin-wrap i{
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 12px;
+    line-height: 12px;
+    font-style: normal;
+  }
 </style>
+  
