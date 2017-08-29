@@ -18,16 +18,21 @@
           <span class="text">{{seller.supports[0].description}}</span>
         </div>
       </div>
-      <div v-if="seller.supports" class="support-count">
+      <div v-if="seller.supports" class="support-count" @click="showDeta">
         <span class="count">{{seller.supports.length}}个</span>
         <i>></i>
       </div>
     </div>
-    <div class="bulletin-wrap">
+    <div class="bulletin-wrap" @click="showDeta">
       <span class="bulletin-title"></span>
       <span class="bulletin-text">{{seller.bulletin}}</span>
       <i>></i>
     </div>
+    <div class="background">
+      <img :src="seller.avatar" width="100%" height="100%" alt="">
+    </div>
+    <!-- 弹窗 -->
+    <div v-show="detailShow" class="detail"></div>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -35,6 +40,17 @@
     props: {
       seller: {
         type: Object
+      }
+    },
+    data: function () {
+      return {
+        detailShow: false
+      }
+    },
+    methods: {
+      // vue的依赖跟中，就可以访问到data里面的数据，然后通知指令去更新数据
+      showDeta () {
+        this.detailShow = true
       }
     },
     created () {
@@ -47,8 +63,10 @@
     font-family: "微软雅黑";
   }
   .header {
+    overflow: hidden;
+    position: relative;
     color: #fff;
-    background-color: #999;
+    background-color: rgba(7,17,27,0.5);
   }
   .content-wrap {
     position: relative;
@@ -151,7 +169,7 @@
     display: inline-block;
     width: 22px;
     height: 12px;
-    margin-top: 7px;
+    margin-top: 8px;
     background-image: url(../../common/images/bulletin@2x.png);
     background-size: 22px 12px;
     vertical-align: top;
@@ -169,6 +187,25 @@
     font-size: 12px;
     line-height: 12px;
     font-style: normal;
+  }
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    filter: blur(10px);
+  }
+  .detail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: rgba(7,17,27, 0.8);
   }
 </style>
   
