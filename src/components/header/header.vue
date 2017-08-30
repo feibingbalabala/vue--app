@@ -32,7 +32,16 @@
       <img :src="seller.avatar" width="100%" height="100%" alt="">
     </div>
     <!-- 弹窗 -->
-    <div v-show="detailShow" class="detail"></div>
+    <div v-show="detailShow" class="detail">
+      <div class="detail-wrap clearfix">
+        <div class="detail-main">
+          <p>{{seller.bulletin}}</p>
+        </div>
+      </div>
+      <div class="detail-close">
+        <i class="icon-close" @click='closeDeta'>x</i>
+      </div>
+    </div>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -51,6 +60,9 @@
       // vue的依赖跟中，就可以访问到data里面的数据，然后通知指令去更新数据
       showDeta () {
         this.detailShow = true
+      },
+      closeDeta () {
+        this.detailShow = false
       }
     },
     created () {
@@ -206,6 +218,37 @@
     height: 100%;
     overflow: auto;
     background: rgba(7,17,27, 0.8);
+  }
+  .clearfix {
+    display: inline-block;
+  }
+  .clearfix:after {
+   display: block;
+   content: "";
+   height: 0;
+   line-height: 0;
+   clear: both;
+   visibility: hidden; 
+  }
+  .detail-wrap {
+    min-height: 100%;
+  }
+  .detail-main {
+    margin-top: 24px;
+    padding-bottom: 64px;
+  }
+  .detail-close {
+    /* position: relative; */
+    width: 32px;
+    height: 32px;
+    margin: -64px auto 0;
+    clear: both;
+    font-size: 32px;
+    line-height: 32px;
+    font-style: normal;
+  }
+  .detail-close i {
+    font-style: normal;
   }
 </style>
   
