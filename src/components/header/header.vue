@@ -32,6 +32,8 @@
       <img :src="seller.avatar" width="100%" height="100%" alt="">
     </div>
     <!-- 弹窗 -->
+    <!-- 添加过渡动画需要用过渡组建 -->
+    <transition name="fade">
     <div v-show="detailShow" class="detail">
       <div class="detail-wrap clearfix">
         <div class="detail-main">
@@ -65,6 +67,7 @@
         <i class="icon-close" @click='closeDeta'>x</i>
       </div>
     </div>
+    </transition>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -245,7 +248,16 @@
     width: 100%;
     height: 100%;
     overflow: auto;
+    transition: all 0.5s;
     background: rgba(7,17,27, 0.8);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  /* 过渡动画和1.0的不同，v-enter-active */
+  .fade-enter-active, {
+    opacity: 1;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
   }
   .clearfix {
     display: inline-block;
