@@ -33,7 +33,7 @@
         if (response.errno === ERR_OK) {
           this.seller = response.data
           // vue 会自动给对象生成get和set方法用于对象的监听
-          console.log(this.seller)
+          // console.log(this.seller)
         }
       })
     },
