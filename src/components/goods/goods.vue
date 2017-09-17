@@ -2,14 +2,39 @@
     <div class="goods">
         <div class="menu-wrapper">
             <ul>
-                <li v-for="item in goods">
+                <li v-for="item in goods" class="menu-item">
                     <span class="text">
-                        <span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>
-                    </span>{{item.name}}
+                        <span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>{{item.name}}
+                    </span>
                 </li>
             </ul>
         </div>
-        <div class="foods-wrapper"></div>
+        <div class="foods-wrapper">
+          <ul>
+            <li v-for="item in goods" class="item-list">
+              <h1 class="title">{{item.name}}</h1>
+              <ul>
+                <li v-for="food in item.foods" class="food-item">
+                  <div class="icon">
+                    <img :src="food.icon" alt="">
+                  </div>
+                  <div class="content">
+                    <h2 class="name">{{food.name}}</h2>
+                    <p class="desc">{{food.description}}</p>
+                    <div class="extra">
+                      <span>月售{{food.sekkCount}}份</span>
+                      <span>好评率{{food.rating}}%</span>
+                    </div>
+                    <div class="price">
+                      <span>￥{{food.price}}</span>
+                      <span v-show="food.oldPrice">￥{{food.oldPrice}}</span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
     </div>
 </template>
 <script type="text/ecmascript-6">
@@ -47,9 +72,49 @@
     width: 100%;
 }
 .goods .menu-wrapper {
-    flex: 0 0 80px;
-    width: 80px;
-    background-color: #f3f5f7;
+  flex: 0 0 80px;
+  width: 80px;
+  background-color: #f3f5f7;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.menu-wrapper .menu-item {
+  display: table;
+  height: 54px;
+  width: 56px;
+  line-height: 14px;
+  padding: 0 12px;
+  border-bottom: 1px solid rgba(7,17,27,0.1);
+}
+.menu-item .icon {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 2px;
+  background-size: 12px 12px;
+  background-repeat: no-repeat;
+  vertical-align: top;
+}
+.menu-item .icon.decrease {
+  background-image: url(../../common/images/decrease_3@2x.png);
+}
+.menu-item .icon.discount {
+  background-image: url(../../common/images/discount_3@2x.png);
+}
+.menu-item .icon.guarantee {
+  background-image: url(../../common/images/guarantee_3@2x.png);
+}
+.menu-item .icon.invoice {
+  background-image: url(../../common/images/invoice_3@2x.png);
+}
+.menu-item .icon.special {
+  background-image: url(../../common/images/special_3@2x.png);
+}
+.menu-item .text {
+  font-size: 12px;
+  width: 56px;
+  display: table-cell;
+  vertical-align: middle;
 }
 .goods .foods-wrapper {
     flex: 1;
