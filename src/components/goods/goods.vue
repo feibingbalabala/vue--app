@@ -16,13 +16,13 @@
               <ul>
                 <li v-for="food in item.foods" class="food-item">
                   <div class="icon">
-                    <img :src="food.icon" alt="">
+                    <img width="57" height="57" :src="food.icon" alt="">
                   </div>
                   <div class="content">
                     <h2 class="name">{{food.name}}</h2>
                     <p class="desc">{{food.description}}</p>
                     <div class="extra">
-                      <span>月售{{food.sekkCount}}份</span>
+                      <span>月售{{food.sellCount}}份</span>
                       <span>好评率{{food.rating}}%</span>
                     </div>
                     <div class="price">
@@ -118,5 +118,39 @@
 }
 .goods .foods-wrapper {
     flex: 1;
+    overflow: auto;
+}
+.foods-wrapper .title {
+  padding-left: 14px;
+  height: 26px;
+  line-height: 26px;
+  border-left: 2px solid #d9dde1;
+  font-size: 12px;
+  color: rgb(147,154,159);
+  background: #f3f5f7;
+  margin: 0;
+}
+.foods-wrapper .food-item{
+  display: flex;
+  margin: 0 18px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(7,17,27,0.1);
+}
+.foods-wrapper .food-item:last-child {
+  border: 0;
+}
+.food-item .icon {
+  flex: 0 0 57px;
+  margin-right: 10px;
+}
+.food-item .content {
+  flex: 1;
+}
+.content .name {
+  margin: 2px 0 8px 0;
+  height: 14px;
+  line-height: 14px;
+  font-size: 14px;
+  color: rgb(7,17,27);
 }
 </style>

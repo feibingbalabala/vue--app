@@ -122,12 +122,12 @@
   .avatar img {
     border-radius: 2px;
   }
-  .content {
+  .content-wrap .content {
     display: inline-block;
     margin-left: 16px;
     font-size: 14px; 
   }
-  .title {
+  .content-wrap .title {
     margin: 2px 0 8px 0;
   }
   .brand {
