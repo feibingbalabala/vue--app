@@ -1,6 +1,6 @@
 <template>
     <div class="goods">
-        <div class="menu-wrapper">
+        <div class="menu-wrapper" ref="menuWrapper">
             <ul>
                 <li v-for="item in goods" class="menu-item">
                     <span class="text">
@@ -9,7 +9,8 @@
                 </li>
             </ul>
         </div>
-        <div class="foods-wrapper">
+        <div class="foods-wrapper" ref="foodsWrapper">
+          <!-- 1.0获取DOM结构v-el:对象名称，必须使用中华线， 2.0中使用ref获取DOM对象，在js中使用$refs获取dom数组-->
           <ul>
             <li v-for="item in goods" class="item-list">
               <h1 class="title">{{item.name}}</h1>
@@ -22,12 +23,12 @@
                     <h2 class="name">{{food.name}}</h2>
                     <p class="desc">{{food.description}}</p>
                     <div class="extra">
-                      <span>月售{{food.sellCount}}份</span>
+                      <span class="count">月售{{food.sellCount}}份</span>
                       <span>好评率{{food.rating}}%</span>
                     </div>
                     <div class="price">
-                      <span>￥{{food.price}}</span>
-                      <span v-show="food.oldPrice">￥{{food.oldPrice}}</span>
+                      <span class="now">￥{{food.price}}</span>
+                      <span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
                     </div>
                   </div>
                 </li>
@@ -38,6 +39,7 @@
     </div>
 </template>
 <script type="text/ecmascript-6">
+  import BScroll from 'better-scroll'
   const ERR_OK = 0
   export default {
     prop: {
@@ -56,9 +58,18 @@
         response = response.body
         if (response.errno === ERR_OK) {
           this.goods = response.data
+          this.$nextTick(() => {
+            this._initScoll()
+          })
         //   console.log(this.goods)
         }
       })
+    },
+    methods: {
+      _initScoll () {
+        this.menuScroll = new BScroll(this.$refs.menuWrapper, {})
+        this.foodScroll = new BScroll(this.$refs.foodsWrapper, {})
+      }
     }
   }
 </script>
@@ -75,8 +86,8 @@
   flex: 0 0 80px;
   width: 80px;
   background-color: #f3f5f7;
-  overflow-y: auto;
-  overflow-x: hidden;
+  /* overflow-y: auto;
+  overflow-x: hidden; */
 }
 .menu-wrapper .menu-item {
   display: table;
@@ -118,7 +129,7 @@
 }
 .goods .foods-wrapper {
     flex: 1;
-    overflow: auto;
+    /* overflow: auto; */
 }
 .foods-wrapper .title {
   padding-left: 14px;
@@ -146,11 +157,40 @@
 .food-item .content {
   flex: 1;
 }
-.content .name {
+.food-item .content .name {
   margin: 2px 0 8px 0;
   height: 14px;
   line-height: 14px;
   font-size: 14px;
   color: rgb(7,17,27);
+}
+.food-item .content .desc {
+  margin-bottom: 8px;
+  line-height: 12px;
+  font-size: 10px;
+  color: rgb(147,154,159);
+}
+.food-item .content .extra {
+  line-height: 10px;
+  font-size: 10px;
+  color: rgb(147,154,159);
+}
+.food-item .content .extra .count {
+  margin-right: 12px;
+}
+.food-item .content .price {
+  font-weight: 700;
+  line-height: 24px;
+  font-size: 0;
+}
+.food-item .content .price .now {
+  margin-right: 8px;
+  font-size: 14px;
+  color: rgb(240, 20, 20);
+}
+.food-item .content .price .old {
+  text-decoration: line-through;
+  font-size: 10px;
+  color: rgb(147, 153, 159);
 }
 </style>
