@@ -2,7 +2,7 @@
     <div class="goods">
         <div class="menu-wrapper" ref="menuWrapper">
             <ul>
-                <li v-for="item in goods" class="menu-item">
+                <li v-for="(item, index) in goods" class="menu-item" :class="{'current': currentIndex === index}" @click="selectMenu(index, $event)">
                     <span class="text">
                         <span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>{{item.name}}
                     </span>
@@ -12,7 +12,7 @@
         <div class="foods-wrapper" ref="foodsWrapper">
           <!-- 1.0获取DOM结构v-el:对象名称，必须使用中华线， 2.0中使用ref获取DOM对象，在js中使用$refs获取dom数组-->
           <ul>
-            <li v-for="item in goods" class="item-list">
+            <li v-for="item in goods" class="item-list food-list-hook">
               <h1 class="title">{{item.name}}</h1>
               <ul>
                 <li v-for="food in item.foods" class="food-item">
@@ -49,7 +49,21 @@
     },
     data () {
       return {
-        goods: []
+        goods: [],
+        listHeight: [],
+        scrollY: 0
+      }
+    },
+    computed: {
+      currentIndex () {
+        for (let i = 0; i < this.listHeight.length; i++) {
+          let height1 = this.listHeight[i]
+          let height2 = this.listHeight[i + 1]
+          if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
+            return i
+          }
+        }
+        return 0
       }
     },
     created () {
@@ -60,15 +74,41 @@
           this.goods = response.data
           this.$nextTick(() => {
             this._initScoll()
+            this._calculateHeight()
           })
         //   console.log(this.goods)
         }
       })
     },
     methods: {
+      selectMenu (index, event) {
+        if (!event._constructed) {
+          return
+        }
+        let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook')
+        let el = foodList[index]
+        this.foodScroll.scrollToElement(el, 300)
+      },
       _initScoll () {
-        this.menuScroll = new BScroll(this.$refs.menuWrapper, {})
-        this.foodScroll = new BScroll(this.$refs.foodsWrapper, {})
+        this.menuScroll = new BScroll(this.$refs.menuWrapper, {
+          click: true
+        })
+        this.foodScroll = new BScroll(this.$refs.foodsWrapper, {
+          probeType: 3
+        })
+        this.foodScroll.on('scroll', (pos) => {
+          this.scrollY = Math.abs(Math.round(pos.y))
+        })
+      },
+      _calculateHeight () {
+        let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook')
+        let height = 0
+        this.listHeight.push(height)
+        for (let i = 0; i < foodList.length; i++) {
+          let item = foodList[i]
+          height += item.clientHeight
+          this.listHeight.push(height)
+        }
       }
     }
   }
@@ -96,6 +136,16 @@
   line-height: 14px;
   padding: 0 12px;
   border-bottom: 1px solid rgba(7,17,27,0.1);
+}
+.menu-wrapper .menu-item.current {
+  position: relative;
+  z-index: 10;
+  margin-top: -1px;
+  background-color: #fff;
+  font-weight: bold;
+}
+.menu-wrapper .menu-item.current .text {
+  border: 0;
 }
 .menu-item .icon {
   display: inline-block;
