@@ -1,10 +1,11 @@
 <template>
   <!-- 这个id并没有什么意义,没有也没关系 -->
-  <div id="wrap">
+  <div id="app">
     <v-header :seller="seller"></v-header>
     <div class="tab">
       <div class="tab-item">
-        <router-link to="/goods">商品</router-link>
+        <!-- vue-router判断当前是哪个页面，并添加类名，这个是局部修改，具体可查看f12 -->
+        <router-link to="/goods" active-class="active2">商品</router-link>
       </div>
       <div class="tab-item">
         <router-link to="/ratings">评论</router-link>
@@ -58,4 +59,13 @@
    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
    border-top: 1px solid rgba(0, 0, 0, 0.5);
  }
+ .tab-item .sel {
+   color: red;
+ }
+ .active {
+   color: red;
+ }
+  .active2 {
+    color: green;
+  }
 </style>

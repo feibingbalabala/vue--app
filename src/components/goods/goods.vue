@@ -2,7 +2,7 @@
     <div class="goods">
         <div class="menu-wrapper" ref="menuWrapper">
             <ul>
-                <li v-for="(item, index) in goods" class="menu-item" :class="{'current': currentIndex === index}" @click="selectMenu(index, $event)">
+                <li v-for="(item, index) in goods" class="menu-item" :class="{'current': currentIndex === index}" @click="selectMenu(index, $event)" :key="item.index">
                     <span class="text">
                         <span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>{{item.name}}
                     </span>
@@ -12,10 +12,11 @@
         <div class="foods-wrapper" ref="foodsWrapper">
           <!-- 1.0获取DOM结构v-el:对象名称，必须使用中华线， 2.0中使用ref获取DOM对象，在js中使用$refs获取dom数组-->
           <ul>
-            <li v-for="item in goods" class="item-list food-list-hook">
+              <!-- 这里有:key的绑定，异步更新时，他会只更新需列表中需要更新的项目， -->
+            <li v-for="item in goods" class="item-list food-list-hook" :key="item.index">
               <h1 class="title">{{item.name}}</h1>
               <ul>
-                <li v-for="food in item.foods" class="food-item">
+                <li v-for="food in item.foods" class="food-item" :key="food.index">
                   <div class="icon">
                     <img width="57" height="57" :src="food.icon" alt="">
                   </div>
@@ -30,18 +31,23 @@
                       <span class="now">￥{{food.price}}</span>
                       <span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
                     </div>
+                    <div class="cartcontrol-wrapper">
+                      <cartconcontrol :food="food"></cartconcontrol>
+                    </div>
                   </div>
                 </li>
               </ul>
             </li>
           </ul>
         </div>
-        <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+        <shopcart :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
     </div>
 </template>
 <script type="text/ecmascript-6">
   import BScroll from 'better-scroll'
   import shopcart from '../shopcart/shopcart'
+  import cartconcontrol from '../cartconcontrol/cartconcontrol'
+
   const ERR_OK = 0
   export default {
     props: {
@@ -66,6 +72,17 @@
           }
         }
         return 0
+      },
+      selectFoods () {
+        let foods = []
+        this.goods.forEach((good) => {
+          good.foods.forEach((food) => {
+            if (food.count) {
+              foods.push(food)
+            }
+          })
+        })
+        return foods
       }
     },
     created () {
@@ -96,6 +113,7 @@
           click: true
         })
         this.foodScroll = new BScroll(this.$refs.foodsWrapper, {
+          click: true,
           probeType: 3
         })
         this.foodScroll.on('scroll', (pos) => {
@@ -114,7 +132,8 @@
       }
     },
     components: {
-      shopcart
+      shopcart,
+      cartconcontrol
     }
   }
 </script>
@@ -211,6 +230,7 @@
 }
 .food-item .content {
   flex: 1;
+  position: relative;
 }
 .food-item .content .name {
   margin: 2px 0 8px 0;
@@ -247,5 +267,10 @@
   text-decoration: line-through;
   font-size: 10px;
   color: rgb(147, 153, 159);
+}
+.food-item .content .cartcontrol-wrapper {
+  position: absolute;
+  right: 0;
+  bottom: 12px;
 }
 </style>

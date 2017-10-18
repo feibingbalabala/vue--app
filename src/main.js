@@ -19,6 +19,9 @@ let routes = [
   { path: '/seller', component: seller }
 ]
 let router = new VueRouter({
+  // 全局修改 vue-router判断当前是哪个页面，并添加类名，查看f12
+  linkActiveClass: 'active',
+  linkExactActiveClass: 'active',
   routes
 })
 new Vue({

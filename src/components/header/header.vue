@@ -48,7 +48,7 @@
           </div>
           <ul v-if="seller.supports" class="supports">
             <!-- 若是遇到数组下标需要提前定义index -->
-            <li class="supports-item" v-for="(item,index) in seller.supports">
+            <li class="supports-item" v-for="(item,index) in seller.supports" :key="item.index">
               <span class="de-icon" :class="classMap[seller.supports[index].type]"></span>
               <span class="text">{{seller.supports[index].description}}</span>
             </li>
