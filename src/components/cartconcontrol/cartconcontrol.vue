@@ -51,10 +51,10 @@ export default {
     padding: 3px;
     transition: all 0.4s linear;
 }
-.cartcontrol .cart-decrease.move-transition {
+/* .cartcontrol .cart-decrease.move-transition {
     opacity: 1;
     transform: translate3d(0,0,0);
-}
+} */
 .cartcontrol .cart-decrease .inner {
     display: inline-block;
     font-size: 15px;
