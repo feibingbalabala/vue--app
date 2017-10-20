@@ -11,7 +11,7 @@
         <div class="price" :class="{'highlight': totalPrice > 0}">￥{{totalPrice}}</div>
         <div class="desc">另需配送费￥{{deliveryPrice}}元</div>
       </div>
-      <div class="content-right">
+      <div class="content-right" @click.stop.prevent="pay">
         <div class="pay" :class="payClass">
           {{payDesc}}
         </div>
@@ -21,7 +21,7 @@
       <div class="shopcart-list" v-show="listShow">
         <div class="list-header">
           <h1 class="title">购物车</h1>
-          <span class="empty">清空</span>
+          <span class="empty" @click="empty">清空</span>
         </div>
         <div class="list-content" ref="listContent">
           <ul>
@@ -37,6 +37,9 @@
           </ul>
         </div>
       </div>
+    </transition>
+    <transition name="backshow">
+      <div class="list-mask" @click="hideList" v-show="listShow"></div>
     </transition>
   </div>
 </template>
@@ -129,6 +132,20 @@
           return
         }
         this.fold = !this.fold
+      },
+      empty () {
+        this.selectFoods.forEach((food) => {
+          food.count = 0
+        })
+      },
+      hideList () {
+        this.fold = true
+      },
+      pay () {
+        if (this.totalPrice < this.minPrice) {
+          return
+        }
+        window.alert(`支付${this.totalPrice}`)
       }
     },
     components: {
@@ -308,6 +325,21 @@
     position: absolute;
     right: 0;
     bottom: 12px;
+  }
+  .shopcart .list-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background-color: rgba(7, 17, 27,0.6);
+    -webkit-backdrop-filter: blur(10);
+    opacity: 1;
+    transition: all 0.5s;
+  }
+  .shopcart .backshow-enter,.shopcart .fbackshowold-leave-to {
+    opacity: 0;
   }
 </style>
 
