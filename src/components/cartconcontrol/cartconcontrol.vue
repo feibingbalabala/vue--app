@@ -69,11 +69,11 @@ export default {
     transition: all 0.4s linear;
     transform: rotate(0);
 }
-.move-enter {
+.cart-decrease.move-enter {
     opacity: 0;
     transform: translate3d(24px, 0,0);
 }
-.move-leave-to {
+.cart-decrease.move-leave-to {
     opacity: 0;
     transform: translate3d(24px, 0,0);
 }

@@ -240,7 +240,7 @@
     z-index: -1;
     filter: blur(10px);
   }
-  .detail {
+  .header .detail {
     position: fixed;
     top: 0;
     left: 0;
