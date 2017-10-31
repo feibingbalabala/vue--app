@@ -111,26 +111,26 @@
     color: #fff;
     background-color: rgba(7,17,27,0.5);
   }
-  .content-wrap {
+  .header .content-wrap {
     position: relative;
     padding: 24px 12px 18px 24px;
   }
-  .avatar {
+  .header .avatar {
     display: inline-block;
     vertical-align: top;
   }
-  .avatar img {
+  .header .avatar img {
     border-radius: 2px;
   }
-  .content-wrap .content {
+  .header .content-wrap .content {
     display: inline-block;
     margin-left: 16px;
     font-size: 14px; 
   }
-  .content-wrap .title {
+  .header .content-wrap .title {
     margin: 2px 0 8px 0;
   }
-  .brand {
+  .header .brand {
     display: inline-block;
     widtH: 30px;
     height: 18px;
@@ -138,21 +138,21 @@
     background-size: 30px 18px;
     background-repeat: no-repeat;
   }
-  .name {
+  .header .name {
     margin-left: 6px;
     font-size: 16px;
     line-height: 18px;
     font-weight: bold;
   }
-  .description {
+  .header .description {
     margin-bottom: 10px;
     line-height: 12px;
     font-size: 12px;
   }
-  .support {
+  .header .support {
     font-size: 0;
   }
-  .support .icon {
+  .header .support .icon {
     display: inline-block;
     width: 12px;
     height: 12px;
@@ -161,26 +161,26 @@
     background-repeat: no-repeat;
     vertical-align: top;
   }
-  .icon.decrease {
+  .header .icon.decrease {
     background-image: url(../../common/images/decrease_1@2x.png);
   }
-  .icon.discount {
+  .header .icon.discount {
     background-image: url(../../common/images/discount_1@2x.png);
   }
-  .icon.guarantee {
+  .header .icon.guarantee {
     background-image: url(../../common/images/guarantee_1@2x.png);
   }
-  .icon.invoice {
+  .header .icon.invoice {
     background-image: url(../../common/images/invoice_1@2x.png);
   }
-  .icon.special {
+  .header .icon.special {
     background-image: url(../../common/images/special_1@2x.png);
   }
-  .support .text {
+  .header .support .text {
     line-height: 12px;
     font-size: 12px;
   }
-  .support-count {
+  .header .support-count {
     position: absolute;
     right: 12px;
     bottom: 18px;
@@ -191,13 +191,13 @@
     background: rgba(0,0,0,0.2);
     text-align: center;
   }
-  .support-count i, .bulletin-wrap i {
+  .header .support-count i, .bulletin-wrap i {
     font-style: normal;
   }
-  .count {
+  .header .count {
     font-size: 10px;
   }
-  .bulletin-wrap {
+  .header .bulletin-wrap {
     position: relative;
     height: 28px;
     line-height: 28px;
@@ -208,7 +208,7 @@
     background: rgba(7,17,27,0.2);
     /* font-size: 0; */
   }
-  .bulletin-title {
+  .header .bulletin-title {
     display: inline-block;
     width: 22px;
     height: 12px;
@@ -218,12 +218,12 @@
     vertical-align: top;
     background-repeat: no-repeat;
   }
-  .bulletin-text {
+  .header .bulletin-text {
     margin: 0 4px;
     font-size: 10px;
     vertical-align: top;
   }
-  .bulletin-wrap i{
+  .header .bulletin-wrap i{
     position: absolute;
     top: 8px;
     right: 12px;
@@ -231,7 +231,7 @@
     line-height: 12px;
     font-style: normal;
   }
-  .background {
+  .header .background {
     position: absolute;
     top: 0;
     left: 0;
