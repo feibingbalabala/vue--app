@@ -253,16 +253,16 @@
     -webkit-backdrop-filter: blur(10px);
   }
   /* 过渡动画和1.0的不同，v-enter-active */
-  .fade-enter-active, {
+  .header .fade-enter-active, {
     opacity: 1;
   }
-  .fade-enter, .fade-leave-to {
+  .header .fade-enter, .fade-leave-to {
     opacity: 0;
   }
-  .clearfix {
+  .header .clearfix {
     display: inline-block;
   }
-  .clearfix:after {
+  .header .clearfix:after {
    display: block;
    content: "";
    height: 0;
@@ -270,15 +270,15 @@
    clear: both;
    visibility: hidden; 
   }
-  .detail-wrap {
+  .header .detail-wrap {
     width: 100%;
     min-height: 100%;
   }
-  .detail-main {
+  .header .detail-main {
     margin-top: 24px;
     padding-bottom: 64px;
   }
-  .detail-close {
+  .header .detail-close {
     /* position: relative; */
     width: 32px;
     height: 32px;
@@ -288,50 +288,50 @@
     line-height: 32px;
     font-style: normal;
   }
-  .detail-close i {
+  .header .detail-close i {
     font-style: normal;
   }
-  .de-name {
+  .header .de-name {
     line-height: 16px;
     text-align: center;
     font-size: 16px;
     font-weight: bold;
     width: 100%; 
   }
-  .star-wrap {
+  .header .star-wrap {
     margin-top: 18px;
     padding: 2px 0;
     text-align: center;
   }
-  .de-tit {
+  .header .de-tit {
     display: flex;
     width: 80%;
     margin: 28px auto 24px;
   }
-  .de-tit .line {
+  .header .de-tit .line {
     flex: 1;
     position: relative;
     top: -6px;
     border-bottom: 1px solid rgba(255,255,255,0.2);
   }
-  .de-tit .text {
+  .header .de-tit .text {
     padding: 0 12px;
     font-size: 14px;
     font-weight: 700;
   }
-  .supports {
+  .header .supports {
     width: 80%;
     margin: 0 auto;
   }
-  .supports-item {
+  .header .supports-item {
     padding: 0 12px;
     margin: 0 0 12px;
     font-size: 0;
   }
-  .supports-item:last-child {
+  .header .supports-item:last-child {
     margin: 0;
   }
-  .de-icon {
+  .header .de-icon {
     display: inline-block;
     width: 16px;
     height: 16px;
@@ -340,30 +340,30 @@
     background-size: 16px 16px;
     background-repeat: no-repeat;
   }
-  .de-icon.decrease {
+  .header .de-icon.decrease {
     background-image: url(../../common/images/decrease_2@2x.png);
   }
-  .de-icon.discount {
+  .header .de-icon.discount {
     background-image: url(../../common/images/discount_2@2x.png);
   }
-  .de-icon.guarantee {
+  .header .de-icon.guarantee {
     background-image: url(../../common/images/guarantee_2@2x.png);
   }
-  .de-icon.invoice {
+  .header .de-icon.invoice {
     background-image: url(../../common/images/invoice_2@2x.png);
   }
-  .de-icon.special {
+  .header .de-icon.special {
     background-image: url(../../common/images/special_2@2x.png);
   }
-  .supports .text {
+  .header .supports .text {
     line-height: 16px;
     font-size: 12px;
   }
-  .de-bulletin  {
+  .header .de-bulletin  {
     width: 80%;
     margin: 0 auto;
   }
-  .de-bulletin .content {
+  .header .de-bulletin .content {
     padding: 0 12px;
     font-size: 12px;
     line-height: 24px;

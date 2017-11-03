@@ -14,27 +14,36 @@
         <router-link to="/seller">商家</router-link>
       </div>
     </div>
-    <router-view :seller="seller"></router-view>
+    <keep-alive>
+      <router-view :seller="seller"></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import header from './components/header/header.vue'
+  import {urlParse} from './common/js/url'
   const ERR_OK = 0
   export default {
     data () {
       return {
-        seller: {}
+        seller: {
+          id: (() => {
+            let queryParam = urlParse()
+            return queryParam.id
+          })()
+        }
       }
     },
     created () {
-      this.$http.get('/api/seller').then((response) => {
+      this.$http.get('/api/seller?id=' + this.seller.id).then((response) => {
         response = response.body
         // .json显示的是 Promise 对象所以用.body方法，可以在github官网上查看方法
         if (response.errno === ERR_OK) {
-          this.seller = response.data
+          // this.seller = response.data
           // vue 会自动给对象生成get和set方法用于对象的监听
           // console.log(this.seller)
+          this.seller = Object.assign({}, this.seller, response.data)
         }
       })
     },
