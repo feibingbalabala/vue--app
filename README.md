@@ -1,24 +1,53 @@
-# VUE项目的实践
+# vue实践
 
-> 自己的第一个VUE项目，VUE的版本为2.0，项目是根据网上的教学资料的，不过教学资料是1.0的，其中在2.0被删除或者替换的方法均已用2.0的方式来实现。
-> 虽说还是很多不明白，但是至少是一个实践。
+## 功能
 
-## Build Setup
+* [ ] header公共组件
+* [ ] 商品列表
+* [ ] 商品详情
+* [ ] 商家详情
+* [ ] ratings(评分组件)
+* [ ] fooder公共组件
 
-``` bash
-# install dependencies
-npm install
+## 技术
 
-# serve with hot reload at localhost:8080
-npm run dev
+系统框架：vue + vue-router
 
-# build for production with minification
-npm run build
+构建工具：webpack + babel + vue-cli
 
-# build for production and view the bundle analyzer report
-npm run build --report
+数据交互：vue-resource
 
-#搭建小型的服务器并把打包后的文件浏览出来(这里自行搭建了一个小型的服务器，配置在跟目录的prod.server.js)
-node prod.server.js
+辅助：npm + git
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## 项目初始化
+
+npm instal --goabal vue-cli 全局安装cli脚手架。
+
+npm init webpack vue-app
+
+建立一个项目文件（生成一个vue-app的文件夹）,之后跳出的都直接回车。
+
+cd vue-app 后执行 npm install 下载依赖
+
+## 数据交互
+
+数据只是请求根目录下一个data.json的文件。
+
+## 采坑
+
+### 对dom的获取
+
+1.0获取DOM结构v-el:对象名称，必须使用中华线， 2.0中使用ref获取DOM对象，在js中使用$refs获取dom数组
+
+### 封装的header组件
+
+``` js
+components: {
+  // 这里要注意不要用header,这个是html的关键字，所以使用v作为组件的开头
+  'v-header': header
+}
+```
+
+### 遍历数组中需要绑定一个:key
+
+这里有:key的绑定，异步更新时，他会只更新需列表中需要更新的项目，
